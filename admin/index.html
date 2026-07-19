@@ -1,459 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luciano Editor — Edição Estratégica de Vídeos</title>
-  <meta name="description" content="Transformamos gravações e roteiros em vídeos que prendem atenção e geram resultados. Edição estratégica, storytelling e narrativa audiovisual.">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Admin — Luciano Editor</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  body { background:var(--gray-50); padding:32px 24px; }
+  .admin-wrap { max-width:900px; margin:0 auto; }
+  .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .admin-header h1 { font-size:1.4rem; font-weight:800; }
+  .logout-btn { cursor:pointer; }
+
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:.82rem; font-weight:600; color:var(--gray-600); margin-bottom:6px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .form-row{ grid-template-columns:1fr; } }
+
+  #save-status { display:none; margin-top:12px; padding:10px 14px; border-radius:var(--radius-md); font-size:.875rem; }
+  #save-status.success { display:block; background:#ECFDF5; border:1px solid #6EE7B7; color:#047857; }
+  #save-status.error   { display:block; background:#FEF2F2; border:1px solid #FCA5A5; color:#B91C1C; }
+
+  #imagem-preview-wrap { display:none; margin-top:10px; }
+  #imagem-preview { max-width:200px; max-height:120px; border-radius:var(--radius-md); object-fit:cover; display:block; }
+  .upload-status { font-size:.8rem; color:var(--gray-500); margin-top:6px; }
+
+  .post-item {
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:14px 16px; border:1px solid var(--gray-200); border-radius:var(--radius-md); margin-bottom:10px;
+  }
+  .post-item .post-title { font-weight:600; color:var(--gray-900); }
+  .post-item .post-meta { font-size:.8rem; color:var(--gray-500); }
+  .post-actions { display:flex; gap:8px; flex-shrink:0; }
+  .post-actions button {
+    border:none; background:var(--gray-100); padding:6px 12px; border-radius:var(--radius-sm);
+    font-size:.8rem; cursor:pointer; font-weight:600;
+  }
+  .post-actions .edit-btn:hover { background:var(--purple-100); color:var(--purple-700); }
+  .post-actions .delete-btn:hover { background:#FEE2E2; color:#B91C1C; }
+  .status-tag { font-size:.7rem; padding:2px 8px; border-radius:999px; font-weight:700; }
+  .status-tag.pub { background:#ECFDF5; color:#047857; }
+  .status-tag.draft { background:var(--gray-100); color:var(--gray-500); }
+</style>
 </head>
 <body>
 
-<div id="navbar-placeholder"></div>
-
-<!-- ── HERO ──────────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content animate-fade-up">
-        <div class="hero-eyebrow">
-          <span class="badge badge-purple">🚀 Edição Estratégica de Vídeos</span>
-        </div>
-        <h1 class="display-xl hero-title">
-          Vídeos que <span class="gradient-text">prendem atenção</span> e geram resultados
-        </h1>
-        <p class="body-lg hero-subtitle">
-          Transformamos suas gravações e roteiros em conteúdo audiovisual profissional — com narrativa, storytelling e estratégia que constroem autoridade e convertem audiência em clientes.
-        </p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary btn-lg">Quero meus vídeos estratégicos</a>
-          <a href="portfolio.html" class="btn btn-secondary btn-lg">Ver portfólio</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <div class="hero-stat-value gradient-text" data-count="150" data-suffix="+">0+</div>
-            <div class="hero-stat-label">Projetos entregues</div>
-          </div>
-          <div>
-            <div class="hero-stat-value gradient-text" data-count="98" data-suffix="%">0%</div>
-            <div class="hero-stat-label">Clientes satisfeitos</div>
-          </div>
-          <div>
-            <div class="hero-stat-value gradient-text" data-count="5" data-suffix="M+">0M+</div>
-            <div class="hero-stat-label">Visualizações geradas</div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual animate-fade delay-3">
-        <div class="hero-illustration animate-float">
-          <svg viewBox="0 0 480 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Monitor / Dashboard -->
-            <rect x="60" y="40" width="360" height="240" rx="16" fill="white" stroke="#E2E8F0" stroke-width="2"/>
-            <rect x="60" y="40" width="360" height="36" rx="16" fill="url(#grad1)"/>
-            <circle cx="84" cy="58" r="6" fill="rgba(255,255,255,.5)"/>
-            <circle cx="104" cy="58" r="6" fill="rgba(255,255,255,.5)"/>
-            <circle cx="124" cy="58" r="6" fill="rgba(255,255,255,.5)"/>
-            <!-- Video timeline -->
-            <rect x="80" y="96" width="320" height="80" rx="10" fill="#F8FAFC"/>
-            <rect x="92" y="108" width="240" height="12" rx="6" fill="url(#grad1)"/>
-            <rect x="92" y="128" width="160" height="8" rx="4" fill="#E2E8F0"/>
-            <rect x="92" y="144" width="200" height="8" rx="4" fill="#E2E8F0"/>
-            <!-- Play button -->
-            <circle cx="350" cy="136" r="22" fill="url(#grad1)"/>
-            <polygon points="344,126 344,146 364,136" fill="white"/>
-            <!-- Analytics bars -->
-            <rect x="80" y="192" width="40" height="60" rx="6" fill="url(#grad1)" opacity=".9"/>
-            <rect x="130" y="210" width="40" height="42" rx="6" fill="url(#grad2)" opacity=".8"/>
-            <rect x="180" y="200" width="40" height="52" rx="6" fill="url(#grad1)" opacity=".7"/>
-            <rect x="230" y="205" width="40" height="47" rx="6" fill="url(#grad2)" opacity=".8"/>
-            <rect x="280" y="195" width="40" height="57" rx="6" fill="url(#grad1)" opacity=".9"/>
-            <rect x="330" y="202" width="40" height="50" rx="6" fill="url(#grad2)" opacity=".7"/>
-            <!-- Stand -->
-            <rect x="215" y="280" width="50" height="16" rx="4" fill="#E2E8F0"/>
-            <rect x="190" y="296" width="100" height="10" rx="5" fill="#CBD5E1"/>
-            <!-- Floating cards -->
-            <rect x="20" y="160" width="120" height="72" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1.5" filter="url(#shadow)"/>
-            <circle cx="44" cy="184" r="12" fill="url(#grad1)"/>
-            <text x="62" y="180" font-family="Plus Jakarta Sans,sans-serif" font-size="9" font-weight="700" fill="#0F172A">Retenção</text>
-            <text x="62" y="193" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#7C3AED">87%</text>
-            <rect x="36" y="206" width="88" height="6" rx="3" fill="#EDE9FE"/>
-            <rect x="36" y="206" width="76" height="6" rx="3" fill="url(#grad1)"/>
-
-            <rect x="340" y="160" width="120" height="72" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1.5" filter="url(#shadow)"/>
-            <circle cx="364" cy="184" r="12" fill="url(#grad2)"/>
-            <text x="382" y="180" font-family="Plus Jakarta Sans,sans-serif" font-size="9" font-weight="700" fill="#0F172A">Crescimento</text>
-            <text x="382" y="193" font-family="Plus Jakarta Sans,sans-serif" font-size="13" font-weight="800" fill="#2563EB">+240%</text>
-            <rect x="356" y="206" width="88" height="6" rx="3" fill="#DBEAFE"/>
-            <rect x="356" y="206" width="70" height="6" rx="3" fill="url(#grad2)"/>
-
-            <!-- Floating icons -->
-            <circle cx="420" cy="60" r="28" fill="url(#grad1)" opacity=".12"/>
-            <text x="408" y="67" font-size="20">🎬</text>
-            <circle cx="60" cy="340" r="22" fill="url(#grad2)" opacity=".12"/>
-            <text x="49" y="347" font-size="16">📈</text>
-            <circle cx="420" cy="340" r="22" fill="url(#grad1)" opacity=".12"/>
-            <text x="409" y="347" font-size="16">🎯</text>
-
-            <defs>
-              <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#7C3AED"/>
-                <stop offset="100%" stop-color="#3B82F6"/>
-              </linearGradient>
-              <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#2563EB"/>
-                <stop offset="100%" stop-color="#7C3AED"/>
-              </linearGradient>
-              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,.08)"/>
-              </filter>
-            </defs>
-          </svg>
-        </div>
-      </div>
-    </div>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1>⚙️ Publicações do Blog</h1>
+    <button class="btn btn-secondary logout-btn" id="logout-btn">Sair →</button>
   </div>
-</section>
 
-<!-- ── BRANDS ─────────────────────────────────────────────────── -->
-<div class="stats-bar">
-  <div class="container">
-    <p class="label text-center text-gray" style="padding-top:32px;margin-bottom:16px">Confiado por criadores e empresas em todo o Brasil</p>
-    <div class="brands-row">
-      <span class="brand-logo">YouTube Creators</span>
-      <span class="brand-logo">Infoprodutores</span>
-      <span class="brand-logo">Agências Digitais</span>
-      <span class="brand-logo">E-commerce</span>
-      <span class="brand-logo">Coaches & Mentores</span>
-      <span class="brand-logo">Podcasters</span>
+  <!-- Formulário criar/editar -->
+  <div class="card" style="margin-bottom:28px;">
+    <h2 class="heading-lg" style="margin-bottom:16px;" id="form-title">Nova publicação</h2>
+    <form id="form-publicacao" novalidate>
+      <input type="hidden" id="post-id" value="">
+      <!-- guarda a URL final da imagem (upload ou já existente ao editar) -->
+      <input type="hidden" id="imagem_url" value="">
+
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" class="form-input" placeholder="Título do artigo" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" class="form-select">
+            <option value="edicao">Edição</option>
+            <option value="estrategia">Estratégia</option>
+            <option value="storytelling">Storytelling</option>
+            <option value="marketing">Marketing</option>
+            <option value="ia">IA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="imagem_arquivo">Imagem da publicação</label>
+          <input type="file" id="imagem_arquivo" class="form-input" accept="image/png, image/jpeg, image/webp">
+          <div class="upload-status" id="upload-status"></div>
+          <div id="imagem-preview-wrap">
+            <img id="imagem-preview" src="" alt="Pré-visualização">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="resumo">Resumo (aparece no card)</label>
+        <textarea id="resumo" class="form-textarea" rows="2" placeholder="Resumo curto do artigo" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="conteudo">Conteúdo completo</label>
+        <textarea id="conteudo" class="form-textarea" rows="8" placeholder="Texto completo do artigo" required></textarea>
+      </div>
+
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="publicado" checked style="width:auto;">
+        <label for="publicado" style="margin:0;">Publicado (visível no site)</label>
+      </div>
+
+      <div style="display:flex; gap:12px;">
+        <button type="submit" class="btn btn-primary" id="save-btn">Salvar</button>
+        <button type="button" class="btn btn-secondary" id="cancel-edit-btn" style="display:none;">Cancelar edição</button>
+      </div>
+      <div id="save-status" role="alert"></div>
+    </form>
+  </div>
+
+  <!-- Lista de publicações -->
+  <div class="card">
+    <h2 class="heading-lg" style="margin-bottom:16px;">Publicações existentes</h2>
+    <div id="posts-list">
+      <p class="body-sm">Carregando...</p>
     </div>
   </div>
 </div>
 
-<!-- ── STATS ──────────────────────────────────────────────────── -->
-<div class="stats-bar" style="background:white">
-  <div class="container">
-    <div class="stats-inner">
-      <div class="stat-item reveal">
-        <div class="stat-number gradient-text" data-count="150" data-suffix="+">0+</div>
-        <div class="stat-label">Projetos Entregues</div>
-      </div>
-      <div class="stat-item reveal delay-1">
-        <div class="stat-number gradient-text" data-count="5" data-suffix="M+">0M+</div>
-        <div class="stat-label">Visualizações Geradas</div>
-      </div>
-      <div class="stat-item reveal delay-2">
-        <div class="stat-number gradient-text" data-count="98" data-suffix="%">0%</div>
-        <div class="stat-label">Satisfação dos Clientes</div>
-      </div>
-      <div class="stat-item reveal delay-3">
-        <div class="stat-number gradient-text" data-count="4" data-suffix=" anos">0 anos</div>
-        <div class="stat-label">de Experiência</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── SERVICES ───────────────────────────────────────────────── -->
-<section class="section bg-gray">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-purple">🎬 Nossos Serviços</span>
-      <h2 class="display-md">Soluções audiovisuais <span class="gradient-text">para cada objetivo</span></h2>
-      <p class="body-lg">Não vendemos apenas edição. Vendemos narrativa, retenção e estratégia que transforma seu conteúdo em autoridade.</p>
-    </div>
-    <div class="services-grid">
-      <div class="card service-card reveal">
-        <div class="card-icon">🎥</div>
-        <h3 class="heading-md">Edição YouTube</h3>
-        <p class="body-md">Vídeos longos com narrativa envolvente, cortes precisos, motion graphics e elementos que maximizam retenção e watch time.</p>
-        <a href="servico-youtube.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-      <div class="card service-card reveal delay-1">
-        <div class="card-icon">📱</div>
-        <h3 class="heading-md">Reels & Shorts</h3>
-        <p class="body-md">Conteúdo vertical otimizado para algoritmos. Edição dinâmica, legendas animadas e ganchos que param o scroll.</p>
-        <a href="servico-reels.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-      <div class="card service-card reveal delay-2">
-        <div class="card-icon">💰</div>
-        <h3 class="heading-md">VSL — Video Sales Letter</h3>
-        <p class="body-md">Vídeos de vendas com estrutura persuasiva, storytelling de conversão e edição que mantém o espectador até o CTA.</p>
-        <a href="servico-vsl.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-      <div class="card service-card reveal delay-1">
-        <div class="card-icon">🎙️</div>
-        <h3 class="heading-md">Podcasts</h3>
-        <p class="body-md">Edição de áudio e vídeo profissional para podcasts. Cortes de silêncio, tratamento sonoro, clipes e episódios completos.</p>
-        <a href="servico-podcast.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-      <div class="card service-card reveal delay-2">
-        <div class="card-icon">🎞️</div>
-        <h3 class="heading-md">Documentários</h3>
-        <p class="body-md">Narrativa cinematográfica para documentários institucionais, mini-docs e histórias de marca que emocionam e engajam.</p>
-        <a href="servico-documentarios.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-      <div class="card service-card reveal delay-3">
-        <div class="card-icon">🏢</div>
-        <h3 class="heading-md">Vídeos Corporativos</h3>
-        <p class="body-md">Apresentações institucionais, treinamentos, eventos e conteúdo corporativo com acabamento premium e identidade visual.</p>
-        <a href="servico-corporativos.html" class="service-link">Ver detalhes <span>→</span></a>
-      </div>
-    </div>
-    <div class="text-center mt-12">
-      <a href="servicos.html" class="btn btn-secondary btn-lg">Ver todos os serviços</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── HOW IT WORKS ────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-blue">⚡ Como Funciona</span>
-      <h2 class="display-md">Do briefing ao vídeo <span class="gradient-text">em 4 etapas</span></h2>
-      <p class="body-lg">Um processo estruturado e transparente para garantir que cada vídeo entregue o resultado esperado.</p>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal">
-        <div class="step-number">01</div>
-        <h3 class="heading-sm">Briefing Estratégico</h3>
-        <p class="body-sm">Entendemos seu objetivo, público-alvo, tom de voz e resultados esperados antes de qualquer edição.</p>
-      </div>
-      <div class="process-step reveal delay-1">
-        <div class="step-number">02</div>
-        <h3 class="heading-sm">Planejamento da Narrativa</h3>
-        <p class="body-sm">Estruturamos a história, definimos o ritmo, os cortes e os elementos visuais que vão compor o vídeo.</p>
-      </div>
-      <div class="process-step reveal delay-2">
-        <div class="step-number">03</div>
-        <h3 class="heading-sm">Edição & Produção</h3>
-        <p class="body-sm">Executamos a edição com precisão: cortes, motion, trilha, color grading e todos os elementos definidos.</p>
-      </div>
-      <div class="process-step reveal delay-3">
-        <div class="step-number">04</div>
-        <h3 class="heading-sm">Entrega & Revisão</h3>
-        <p class="body-sm">Entregamos o vídeo finalizado com revisões incluídas até a aprovação completa do cliente.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PORTFOLIO PREVIEW ───────────────────────────────────────── -->
-<section class="section bg-gray">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-purple">📹 Portfólio</span>
-      <h2 class="display-md">Projetos que <span class="gradient-text">falam por si</span></h2>
-      <p class="body-lg">Uma seleção dos trabalhos que mais orgulhamos — cada um com uma história, um desafio e um resultado concreto.</p>
-    </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-card reveal">
-        <div class="portfolio-thumb" style="background: linear-gradient(135deg,#EDE9FE,#DBEAFE)">
-          <svg viewBox="0 0 80 80" fill="none"><rect x="10" y="20" width="60" height="40" rx="6" fill="url(#pg1)"/><polygon points="32,30 32,50 56,40" fill="white"/><defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs></svg>
-          <div class="portfolio-play"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/><polygon points="10,8 10,16 17,12" fill="white"/></svg></div>
-        </div>
-        <div class="portfolio-info">
-          <span class="badge badge-purple portfolio-category">YouTube</span>
-          <h3 class="heading-sm">Canal de Finanças — 0 a 100k inscritos</h3>
-          <p class="body-sm">Estratégia de edição que aumentou o watch time em 340% e levou o canal ao monetização em 8 meses.</p>
-          <div class="portfolio-tags">
-            <span class="badge badge-gray">Retenção</span>
-            <span class="badge badge-gray">Narrativa</span>
-            <span class="badge badge-gray">Motion</span>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-card reveal delay-1">
-        <div class="portfolio-thumb" style="background: linear-gradient(135deg,#DBEAFE,#EDE9FE)">
-          <svg viewBox="0 0 80 80" fill="none"><rect x="25" y="10" width="30" height="60" rx="6" fill="url(#pg2)"/><polygon points="35,28 35,44 50,36" fill="white"/><defs><linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#7C3AED"/></linearGradient></defs></svg>
-          <div class="portfolio-play"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/><polygon points="10,8 10,16 17,12" fill="white"/></svg></div>
-        </div>
-        <div class="portfolio-info">
-          <span class="badge badge-blue portfolio-category">Reels</span>
-          <h3 class="heading-sm">Infoprodutor — Lançamento de R$ 2M</h3>
-          <p class="body-sm">Série de Reels para aquecimento de lançamento que gerou 1.2M de visualizações orgânicas em 30 dias.</p>
-          <div class="portfolio-tags">
-            <span class="badge badge-gray">Lançamento</span>
-            <span class="badge badge-gray">Viral</span>
-            <span class="badge badge-gray">Conversão</span>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-card reveal delay-2">
-        <div class="portfolio-thumb" style="background: linear-gradient(135deg,#F5F3FF,#EFF6FF)">
-          <svg viewBox="0 0 80 80" fill="none"><rect x="8" y="24" width="64" height="32" rx="6" fill="url(#pg3)"/><circle cx="40" cy="40" r="10" fill="rgba(255,255,255,.3)"/><polygon points="36,34 36,46 48,40" fill="white"/><defs><linearGradient id="pg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs></svg>
-          <div class="portfolio-play"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/><polygon points="10,8 10,16 17,12" fill="white"/></svg></div>
-        </div>
-        <div class="portfolio-info">
-          <span class="badge badge-purple portfolio-category">VSL</span>
-          <h3 class="heading-sm">VSL de Mentoria — 8% de conversão</h3>
-          <p class="body-sm">Video Sales Letter com estrutura persuasiva que alcançou 8% de taxa de conversão em campanha fria.</p>
-          <div class="portfolio-tags">
-            <span class="badge badge-gray">Vendas</span>
-            <span class="badge badge-gray">Persuasão</span>
-            <span class="badge badge-gray">Funil</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-12">
-      <a href="portfolio.html" class="btn btn-primary btn-lg">Ver portfólio completo</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIALS ───────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-purple">⭐ Depoimentos</span>
-      <h2 class="display-md">O que nossos <span class="gradient-text">clientes dizem</span></h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="card testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"O Luciano não é apenas um editor. Ele pensa estrategicamente em cada corte. Meu canal cresceu 3x depois que comecei a trabalhar com ele."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">MA</div>
-          <div>
-            <div class="testimonial-name">Marcos Alves</div>
-            <div class="testimonial-role">Criador de Conteúdo — 280k inscritos</div>
-          </div>
-        </div>
-      </div>
-      <div class="card testimonial-card reveal delay-1">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Nossa VSL com o Luciano converteu 8%. Nunca tínhamos chegado perto disso. A edição faz toda a diferença na percepção de valor."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">CS</div>
-          <div>
-            <div class="testimonial-name">Carolina Santos</div>
-            <div class="testimonial-role">Mentora de Negócios Digitais</div>
-          </div>
-        </div>
-      </div>
-      <div class="card testimonial-card reveal delay-2">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Profissionalismo absurdo. Entrega no prazo, comunicação clara e o resultado final sempre supera as expectativas. Recomendo sem hesitar."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">RF</div>
-          <div>
-            <div class="testimonial-name">Rafael Ferreira</div>
-            <div class="testimonial-role">CEO — Agência de Marketing Digital</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── BLOG PREVIEW ───────────────────────────────────────────── -->
-<section class="section bg-gray">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-blue">📖 Blog</span>
-      <h2 class="display-md">Conteúdo que <span class="gradient-text">educa e inspira</span></h2>
-      <p class="body-lg">Artigos sobre edição de vídeo, storytelling, marketing digital e estratégia de conteúdo.</p>
-    </div>
-    <div class="blog-grid">
-      <div class="blog-card reveal">
-        <div class="blog-thumb">🎬</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-purple">Edição</span>
-            <span class="body-sm">5 min de leitura</span>
-          </div>
-          <h3>Como aumentar o watch time do seu canal em 300%</h3>
-          <p class="body-sm">As técnicas de edição que os maiores canais do YouTube usam para manter o espectador assistindo até o final.</p>
-          <a href="blog.html" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-      <div class="blog-card reveal delay-1">
-        <div class="blog-thumb">📈</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-blue">Estratégia</span>
-            <span class="body-sm">7 min de leitura</span>
-          </div>
-          <h3>VSL vs. Webinar: qual converte mais em 2025?</h3>
-          <p class="body-sm">Uma análise comparativa baseada em dados reais de campanhas para ajudar você a escolher o formato certo.</p>
-          <a href="blog.html" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-      <div class="blog-card reveal delay-2">
-        <div class="blog-thumb">🧠</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-purple">Storytelling</span>
-            <span class="body-sm">6 min de leitura</span>
-          </div>
-          <h3>A estrutura narrativa que transforma vídeos em vendas</h3>
-          <p class="body-sm">Como aplicar os princípios do storytelling cinematográfico para criar vídeos que convencem e convertem.</p>
-          <a href="blog.html" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-12">
-      <a href="blog.html" class="btn btn-secondary btn-lg">Ver todos os artigos</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ────────────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-gray">❓ FAQ</span>
-      <h2 class="display-md">Perguntas <span class="gradient-text">frequentes</span></h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question">Qual é o prazo de entrega dos vídeos? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">O prazo varia conforme o tipo e a complexidade do projeto. Reels e Shorts: 2–3 dias úteis. Vídeos YouTube: 4–7 dias úteis. VSL e Documentários: 7–14 dias úteis. Prazos expressos podem ser negociados.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Quantas revisões estão incluídas? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">Todos os projetos incluem revisões ilimitadas dentro do escopo acordado no briefing. Nosso objetivo é que você fique 100% satisfeito com o resultado final.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Como funciona o processo de envio dos arquivos? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">Após o briefing, você envia os arquivos brutos via Google Drive, Dropbox ou WeTransfer. Trabalhamos com todos os formatos de câmera e qualidade de vídeo.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Vocês trabalham com contratos mensais? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">Sim! Oferecemos planos mensais com pacotes de vídeos, ideal para criadores de conteúdo e empresas que precisam de produção contínua com preço diferenciado.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Qual software de edição é utilizado? <span class="faq-icon">+</span></button>
-        <div class="faq-answer">Utilizamos Adobe Premiere Pro, After Effects, DaVinci Resolve e CapCut Pro, dependendo do tipo de projeto e das necessidades específicas de cada cliente.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA ────────────────────────────────────────────────────── -->
-<section class="section-sm">
-  <div class="container">
-    <div class="cta-section reveal">
-      <span class="badge" style="background:rgba(255,255,255,.15);color:white;margin-bottom:24px">🚀 Pronto para começar?</span>
-      <h2 class="display-md">Transforme seus vídeos em <span style="text-decoration:underline;text-decoration-color:rgba(255,255,255,.4)">resultados reais</span></h2>
-      <p class="body-lg">Agende uma conversa gratuita e descubra como a edição estratégica pode mudar o jogo do seu negócio.</p>
-      <div class="cta-actions">
-        <a href="contato.html" class="btn btn-primary btn-lg" style="background:white;color:var(--purple-700)">Falar com especialista</a>
-        <a href="portfolio.html" class="btn btn-secondary btn-lg">Ver portfólio</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div id="footer-placeholder"></div>
-
-<script src="assets/js/components.js"></script>
-<script>
-  renderNavbar('index.html');
-  renderFooter();
-  initReveal();
-  animateCounters();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase-config.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>
