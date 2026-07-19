@@ -2,8 +2,8 @@
    ADMINISTRATIVO — admin.js
    ============================================================ */
 
-const supabaseUrl = 'SUA_URL_AQUI'; // Substitua
-const supabaseKey = 'SUA_CHAVE_ANON_AQUI'; // Substitua
+const supabaseUrl = 'https://tqxejgrbnvfgoqztrcpx.supabase.co'; // Substitua
+const supabaseKey = 'sb_publishable_mX4XsY4ezp9WUkEPE1vMJQ_K_d359Z3'; // Substitua
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // Trava de Segurança: Expulsa se não estiver logado
