@@ -42,117 +42,14 @@
       </div>
     </div>
 
-    <!-- Featured Article -->
-    <div class="card reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;padding:0;margin-bottom:48px">
-      <div style="background:linear-gradient(135deg,#EDE9FE,#DBEAFE);display:flex;align-items:center;justify-content:center;font-size:5rem;padding:48px;min-height:280px">🎬</div>
-      <div style="padding:40px">
-        <div style="display:flex;gap:12px;margin-bottom:16px">
-          <span class="badge badge-purple">Destaque</span>
-          <span class="badge badge-gray">Edição</span>
-          <span class="body-sm" style="display:flex;align-items:center">8 min de leitura</span>
-        </div>
-        <h2 class="heading-lg" style="margin-bottom:12px">Como aumentar o watch time do seu canal em 300%</h2>
-        <p class="body-md" style="margin-bottom:24px">As técnicas de edição que os maiores canais do YouTube usam para manter o espectador assistindo até o final — e como você pode aplicar hoje mesmo.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:10px">
-            <img src="assets/img/luciano-photo.jpg" alt="Luciano" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
-            <div>
-              <div style="font-size:.875rem;font-weight:600;color:var(--gray-900)">Luciano Editor</div>
-              <div class="body-sm">15 Jun 2025</div>
-            </div>
-          </div>
-          <a href="#" class="btn btn-primary btn-sm">Ler artigo</a>
-        </div>
-      </div>
-    </div>
+    <!-- Featured Article (preenchido dinamicamente com o post mais recente) -->
+    <div id="blogFeatured"></div>
 
-    <!-- Blog Grid -->
+    <!-- Blog Grid (preenchido dinamicamente) -->
     <div class="blog-grid" id="blogGrid">
-
-      <div class="blog-card" data-category="estrategia">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#DBEAFE,#EDE9FE)">📈</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-blue">Estratégia</span>
-            <span class="body-sm">7 min</span>
-          </div>
-          <h3>VSL vs. Webinar: qual converte mais em 2025?</h3>
-          <p class="body-sm">Uma análise comparativa baseada em dados reais de campanhas para ajudar você a escolher o formato certo.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="blog-card" data-category="storytelling">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE)">🧠</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-purple">Storytelling</span>
-            <span class="body-sm">6 min</span>
-          </div>
-          <h3>A estrutura narrativa que transforma vídeos em vendas</h3>
-          <p class="body-sm">Como aplicar os princípios do storytelling cinematográfico para criar vídeos que convencem e convertem.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="blog-card" data-category="marketing">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE)">🎯</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-blue">Marketing</span>
-            <span class="body-sm">5 min</span>
-          </div>
-          <h3>Funil de conteúdo: como usar vídeos em cada etapa</h3>
-          <p class="body-sm">Do topo ao fundo do funil: qual tipo de vídeo usar em cada momento da jornada do cliente.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="blog-card" data-category="edicao">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF)">✂️</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-purple">Edição</span>
-            <span class="body-sm">9 min</span>
-          </div>
-          <h3>Os 10 erros de edição que destroem a retenção</h3>
-          <p class="body-sm">Erros comuns que fazem o espectador abandonar o vídeo — e como corrigi-los imediatamente.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="blog-card" data-category="ia">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF)">🤖</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-blue">IA</span>
-            <span class="body-sm">6 min</span>
-          </div>
-          <h3>Como usar IA na edição de vídeo sem perder qualidade</h3>
-          <p class="body-sm">Ferramentas de inteligência artificial que aceleram o fluxo de trabalho sem comprometer o resultado final.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
-      <div class="blog-card" data-category="estrategia">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#F5F3FF,#DBEAFE)">🚀</div>
-        <div class="blog-body">
-          <div class="blog-meta">
-            <span class="badge badge-purple">Estratégia</span>
-            <span class="body-sm">8 min</span>
-          </div>
-          <h3>Como construir autoridade com vídeos em 90 dias</h3>
-          <p class="body-sm">Um plano prático de 90 dias para transformar seu canal em referência no seu nicho usando edição estratégica.</p>
-          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
-        </div>
-      </div>
-
+      <p class="body-sm">Carregando publicações...</p>
     </div>
 
-    <!-- Load more -->
-    <div class="text-center mt-12">
-      <button class="btn btn-secondary btn-lg">Carregar mais artigos</button>
-    </div>
   </div>
 </section>
 
@@ -172,20 +69,112 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
 <script src="assets/js/components.js"></script>
 <script>
   renderNavbar('blog.html');
   renderFooter();
-  initFilters('#blogGrid', '.blog-card', 'category');
+  initReveal();
 
-  // Search
-  document.getElementById('blogSearch').addEventListener('input', function() {
-    const q = this.value.toLowerCase();
-    document.querySelectorAll('.blog-card').forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(q) ? '' : 'none';
+  const CATEGORIA_LABEL = {
+    edicao: { badge: 'badge-purple', nome: 'Edição' },
+    estrategia: { badge: 'badge-blue', nome: 'Estratégia' },
+    storytelling: { badge: 'badge-purple', nome: 'Storytelling' },
+    marketing: { badge: 'badge-blue', nome: 'Marketing' },
+    ia: { badge: 'badge-blue', nome: 'IA' },
+  };
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str ?? '';
+    return div.innerHTML;
+  }
+
+  function tempoLeitura(texto) {
+    const palavras = (texto || '').trim().split(/\s+/).length;
+    return Math.max(1, Math.round(palavras / 200)) + ' min';
+  }
+
+  function renderFeatured(post) {
+    const el = document.getElementById('blogFeatured');
+    if (!post) { el.innerHTML = ''; return; }
+    const cat = CATEGORIA_LABEL[post.categoria] || { badge: 'badge-gray', nome: post.categoria || '' };
+
+    el.innerHTML = `
+      <div class="card reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;padding:0;margin-bottom:48px">
+        <div style="background:${post.imagem_url ? `url('${post.imagem_url}') center/cover` : 'linear-gradient(135deg,#EDE9FE,#DBEAFE)'};display:flex;align-items:center;justify-content:center;font-size:5rem;padding:48px;min-height:280px">${post.imagem_url ? '' : '🎬'}</div>
+        <div style="padding:40px">
+          <div style="display:flex;gap:12px;margin-bottom:16px">
+            <span class="badge badge-purple">Destaque</span>
+            <span class="badge ${cat.badge}">${escapeHtml(cat.nome)}</span>
+            <span class="body-sm" style="display:flex;align-items:center">${tempoLeitura(post.conteudo)} de leitura</span>
+          </div>
+          <h2 class="heading-lg" style="margin-bottom:12px">${escapeHtml(post.titulo)}</h2>
+          <p class="body-md" style="margin-bottom:24px">${escapeHtml(post.resumo)}</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div class="body-sm">${new Date(post.created_at).toLocaleDateString('pt-BR')}</div>
+            <a href="#" class="btn btn-primary btn-sm">Ler artigo</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGrid(posts) {
+    const el = document.getElementById('blogGrid');
+    if (!posts.length) {
+      el.innerHTML = '<p class="body-sm">Nenhuma publicação ainda. Volte em breve!</p>';
+      return;
+    }
+
+    el.innerHTML = posts.map(post => {
+      const cat = CATEGORIA_LABEL[post.categoria] || { badge: 'badge-gray', nome: post.categoria || '' };
+      return `
+        <div class="blog-card" data-category="${post.categoria || ''}">
+          <div class="blog-thumb" style="${post.imagem_url ? `background:url('${post.imagem_url}') center/cover` : 'background:linear-gradient(135deg,#DBEAFE,#EDE9FE)'}">${post.imagem_url ? '' : '📝'}</div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="badge ${cat.badge}">${escapeHtml(cat.nome)}</span>
+              <span class="body-sm">${tempoLeitura(post.conteudo)}</span>
+            </div>
+            <h3>${escapeHtml(post.titulo)}</h3>
+            <p class="body-sm">${escapeHtml(post.resumo)}</p>
+            <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function carregarBlog() {
+    const { data, error } = await supabaseClient
+      .from('publicacoes')
+      .select('*')
+      .eq('publicado', true)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      document.getElementById('blogGrid').innerHTML = '<p class="body-sm">Não foi possível carregar as publicações agora.</p>';
+      console.error('[Blog] Erro ao buscar publicações:', error.message);
+      return;
+    }
+
+    const posts = data || [];
+    renderFeatured(posts[0]);
+    renderGrid(posts.slice(1));
+    initFilters('#blogGrid', '.blog-card', 'category');
+
+    document.getElementById('blogSearch').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      document.querySelectorAll('.blog-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
     });
-  });
+  }
+
+  carregarBlog();
 </script>
 </body>
 </html>
