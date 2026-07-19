@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Luciano Editor</title>
+  <meta name="description" content="Entre em contato com a Luciano Editor. Agende uma conversa gratuita e descubra como podemos transformar seus vídeos.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<!-- ── PAGE HERO ──────────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto" class="animate-fade-up">
+      <span class="badge badge-purple" style="margin-bottom:16px">💬 Contato</span>
+      <h1 class="display-lg" style="margin-bottom:16px">Vamos conversar sobre <span class="gradient-text">seu projeto</span></h1>
+      <p class="body-lg">Agende uma conversa gratuita de 30 minutos e descubra como a edição estratégica pode transformar seus resultados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Info -->
+      <div class="reveal">
+        <h2 class="display-md" style="margin-bottom:24px">Fale com a <span class="gradient-text">nossa equipe</span></h2>
+        <p class="body-lg" style="margin-bottom:40px">Respondemos em até 24 horas úteis. Para projetos urgentes, entre em contato via WhatsApp.</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <h4 class="heading-sm" style="margin-bottom:4px">E-mail</h4>
+              <p class="body-md">contato@lucianoeditor.com</p>
+              <p class="body-sm">Respondemos em até 24h úteis</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <h4 class="heading-sm" style="margin-bottom:4px">WhatsApp</h4>
+              <p class="body-md">+55 (11) 99999-9999</p>
+              <p class="body-sm">Seg–Sex, 9h–18h</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4 class="heading-sm" style="margin-bottom:4px">Localização</h4>
+              <p class="body-md">São Paulo, Brasil</p>
+              <p class="body-sm">Atendemos clientes em todo o Brasil e exterior</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div style="margin-top:40px;padding-top:40px;border-top:1px solid var(--gray-200)">
+          <h4 class="heading-sm" style="margin-bottom:16px">Nos siga nas redes</h4>
+          <div style="display:flex;gap:12px">
+            <a href="#" class="btn btn-secondary btn-sm">Instagram</a>
+            <a href="#" class="btn btn-secondary btn-sm">YouTube</a>
+            <a href="#" class="btn btn-secondary btn-sm">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Testimonial mini -->
+        <div class="card" style="margin-top:40px;padding:24px">
+          <div class="testimonial-stars">★★★★★</div>
+          <p style="font-size:.9375rem;color:var(--gray-700);font-style:italic;margin-bottom:16px">"Processo super organizado, comunicação excelente e resultado acima do esperado. Recomendo muito!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JP</div>
+            <div>
+              <div class="testimonial-name">João Pedro</div>
+              <div class="testimonial-role">Criador de Conteúdo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="reveal delay-2">
+        <div class="contact-form">
+          <h3 class="heading-lg" style="margin-bottom:8px">Solicitar orçamento</h3>
+          <p class="body-sm" style="margin-bottom:28px">Preencha o formulário e entraremos em contato em até 24 horas.</p>
+
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Nome *</label>
+                <input type="text" class="form-input" placeholder="Seu nome completo" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">E-mail *</label>
+                <input type="email" class="form-input" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">WhatsApp</label>
+                <input type="tel" class="form-input" placeholder="(11) 99999-9999">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Serviço de interesse *</label>
+                <select class="form-select" required>
+                  <option value="">Selecione...</option>
+                  <option>Edição YouTube</option>
+                  <option>Reels & Shorts</option>
+                  <option>VSL — Video Sales Letter</option>
+                  <option>Podcast</option>
+                  <option>Documentário</option>
+                  <option>Vídeo Corporativo</option>
+                  <option>Pacote Mensal</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Volume mensal de vídeos</label>
+              <select class="form-select">
+                <option value="">Selecione...</option>
+                <option>1–2 vídeos/mês</option>
+                <option>3–5 vídeos/mês</option>
+                <option>6–10 vídeos/mês</option>
+                <option>10+ vídeos/mês</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Conte sobre seu projeto *</label>
+              <textarea class="form-textarea" placeholder="Descreva seu projeto, objetivos, público-alvo e qualquer informação relevante..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-full" style="justify-content:center">
+              Enviar solicitação
+            </button>
+            <p class="body-sm text-center" style="margin-top:12px">Respondemos em até 24 horas úteis. Sem compromisso.</p>
+          </form>
+
+          <div id="formSuccess" style="display:none;text-align:center;padding:40px 0">
+            <div style="font-size:3rem;margin-bottom:16px">✅</div>
+            <h3 class="heading-lg" style="margin-bottom:8px">Mensagem enviada!</h3>
+            <p class="body-md">Entraremos em contato em até 24 horas úteis.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────────── -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="badge badge-gray">❓ Dúvidas Frequentes</span>
+      <h2 class="display-md">Antes de entrar em <span class="gradient-text">contato</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">Qual é o investimento mínimo? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Os valores variam conforme o tipo de projeto e volume. Reels e Shorts a partir de R$ 150/vídeo. Vídeos YouTube a partir de R$ 300/vídeo. VSL a partir de R$ 800. Entre em contato para um orçamento personalizado.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Vocês atendem clientes fora do Brasil? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Sim! Atendemos clientes em todo o mundo. Todo o processo é 100% remoto — briefing, envio de arquivos e entrega são feitos digitalmente.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Como é feito o pagamento? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Aceitamos PIX, transferência bancária e cartão de crédito. Para projetos maiores, trabalhamos com 50% de entrada e 50% na entrega. Planos mensais têm faturamento recorrente.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Preciso ter o roteiro pronto? <span class="faq-icon">+</span></button>
+        <div class="faq-answer">Não necessariamente. Trabalhamos com gravações brutas e podemos estruturar a narrativa durante a edição. Para VSLs, recomendamos ter um roteiro base, mas podemos ajudar na estruturação.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/js/components.js"></script>
+<script>
+  renderNavbar('contato.html');
+  renderFooter();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>

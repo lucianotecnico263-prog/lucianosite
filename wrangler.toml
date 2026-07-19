@@ -1,0 +1,28 @@
+# ============================================================
+# Luciano Júnior | Editor de Vídeo — wrangler.toml
+# Cloudflare Pages + Worker + D1
+# ============================================================
+
+name = "luciano-editor-worker"
+main = "worker/index.js"
+compatibility_date = "2024-09-23"
+
+# ── Cloudflare D1 Database ────────────────────────────────
+[[d1_databases]]
+binding      = "DB"
+database_name = "luciano-db"
+database_id   = "SUBSTITUA-PELO-ID-DO-SEU-D1"
+# Para obter o ID: wrangler d1 create luciano-db
+
+# ── Routes (Worker responde em /api/*) ────────────────────
+# Configure isso no dashboard do Cloudflare Pages:
+# Settings > Functions > Route bindings
+# Ou adicione o worker como rota no projeto Pages.
+
+# ── Variáveis de ambiente (opcional) ─────────────────────
+# [vars]
+# ENVIRONMENT = "production"
+
+# ── Para deploy do Worker standalone ─────────────────────
+# wrangler deploy
+# O frontend é deployado via Cloudflare Pages (pasta /frontend)

@@ -1,0 +1,31 @@
+# Luciano Júnior - Editor Estratégico
+
+Title: Luciano Júnior - Editor Estratégico
+Description: Edição estratégica para YouTube e Redes Sociais. Especialista em Storytelling, retenção de audiência, marketing digital e crescimento nas redes. Teste por apenas R$30.
+Contact: WhatsApp +55 75 8138-5296
+URL: https://lucianojunior.pages.dev/
+API: /api/settings
+
+## Services
+- Strategic video editing
+- Storytelling and narrative
+- Audience retention optimization
+- Digital marketing strategy
+- YouTube and social media growth
+- Instagram Reels, YouTube Shorts, TikTok
+- Audio mixing and sync
+- Corporate videos
+
+## Expertise
+- Storytelling
+- Marketing Digital
+- Audience Retention
+- YouTube Strategy
+- Viral Growth
+- Adobe Premiere
+- DaVinci Resolve
+
+## Pricing
+- Test package: R$30 per video
+- Delivery: up to 48 hours
+- Includes: 3 free revisions

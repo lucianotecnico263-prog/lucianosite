@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Luciano Editor</title>
+  <meta name="description" content="Artigos sobre edição de vídeo, storytelling, marketing digital e estratégia de conteúdo audiovisual.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<!-- ── PAGE HERO ──────────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="container">
+    <div style="text-align:center;max-width:680px;margin:0 auto" class="animate-fade-up">
+      <span class="badge badge-blue" style="margin-bottom:16px">📖 Blog</span>
+      <h1 class="display-lg" style="margin-bottom:16px">Conteúdo que <span class="gradient-text">educa e inspira</span></h1>
+      <p class="body-lg">Artigos sobre edição de vídeo, storytelling, marketing digital, algoritmos e estratégia de conteúdo audiovisual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ───────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+
+    <!-- Search + Filters -->
+    <div class="reveal" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px">
+      <div class="blog-filters" style="margin-bottom:0">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="edicao">Edição</button>
+        <button class="filter-btn" data-filter="estrategia">Estratégia</button>
+        <button class="filter-btn" data-filter="storytelling">Storytelling</button>
+        <button class="filter-btn" data-filter="marketing">Marketing</button>
+        <button class="filter-btn" data-filter="ia">IA</button>
+      </div>
+      <div class="blog-search">
+        <svg class="blog-search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Buscar artigos..." id="blogSearch">
+      </div>
+    </div>
+
+    <!-- Featured Article -->
+    <div class="card reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;padding:0;margin-bottom:48px">
+      <div style="background:linear-gradient(135deg,#EDE9FE,#DBEAFE);display:flex;align-items:center;justify-content:center;font-size:5rem;padding:48px;min-height:280px">🎬</div>
+      <div style="padding:40px">
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <span class="badge badge-purple">Destaque</span>
+          <span class="badge badge-gray">Edição</span>
+          <span class="body-sm" style="display:flex;align-items:center">8 min de leitura</span>
+        </div>
+        <h2 class="heading-lg" style="margin-bottom:12px">Como aumentar o watch time do seu canal em 300%</h2>
+        <p class="body-md" style="margin-bottom:24px">As técnicas de edição que os maiores canais do YouTube usam para manter o espectador assistindo até o final — e como você pode aplicar hoje mesmo.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img src="assets/img/luciano-photo.jpg" alt="Luciano" style="width:36px;height:36px;border-radius:50%;object-fit:cover">
+            <div>
+              <div style="font-size:.875rem;font-weight:600;color:var(--gray-900)">Luciano Editor</div>
+              <div class="body-sm">15 Jun 2025</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary btn-sm">Ler artigo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid" id="blogGrid">
+
+      <div class="blog-card" data-category="estrategia">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#DBEAFE,#EDE9FE)">📈</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-blue">Estratégia</span>
+            <span class="body-sm">7 min</span>
+          </div>
+          <h3>VSL vs. Webinar: qual converte mais em 2025?</h3>
+          <p class="body-sm">Uma análise comparativa baseada em dados reais de campanhas para ajudar você a escolher o formato certo.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="blog-card" data-category="storytelling">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE)">🧠</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-purple">Storytelling</span>
+            <span class="body-sm">6 min</span>
+          </div>
+          <h3>A estrutura narrativa que transforma vídeos em vendas</h3>
+          <p class="body-sm">Como aplicar os princípios do storytelling cinematográfico para criar vídeos que convencem e convertem.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="blog-card" data-category="marketing">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE)">🎯</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-blue">Marketing</span>
+            <span class="body-sm">5 min</span>
+          </div>
+          <h3>Funil de conteúdo: como usar vídeos em cada etapa</h3>
+          <p class="body-sm">Do topo ao fundo do funil: qual tipo de vídeo usar em cada momento da jornada do cliente.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="blog-card" data-category="edicao">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF)">✂️</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-purple">Edição</span>
+            <span class="body-sm">9 min</span>
+          </div>
+          <h3>Os 10 erros de edição que destroem a retenção</h3>
+          <p class="body-sm">Erros comuns que fazem o espectador abandonar o vídeo — e como corrigi-los imediatamente.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="blog-card" data-category="ia">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF)">🤖</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-blue">IA</span>
+            <span class="body-sm">6 min</span>
+          </div>
+          <h3>Como usar IA na edição de vídeo sem perder qualidade</h3>
+          <p class="body-sm">Ferramentas de inteligência artificial que aceleram o fluxo de trabalho sem comprometer o resultado final.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="blog-card" data-category="estrategia">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#F5F3FF,#DBEAFE)">🚀</div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="badge badge-purple">Estratégia</span>
+            <span class="body-sm">8 min</span>
+          </div>
+          <h3>Como construir autoridade com vídeos em 90 dias</h3>
+          <p class="body-sm">Um plano prático de 90 dias para transformar seu canal em referência no seu nicho usando edição estratégica.</p>
+          <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Load more -->
+    <div class="text-center mt-12">
+      <button class="btn btn-secondary btn-lg">Carregar mais artigos</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ─────────────────────────────────────────────── -->
+<section class="section-sm bg-gray">
+  <div class="container">
+    <div class="card reveal" style="max-width:600px;margin:0 auto;text-align:center;padding:48px">
+      <span style="font-size:2.5rem;display:block;margin-bottom:16px">📧</span>
+      <h2 class="heading-lg" style="margin-bottom:12px">Receba conteúdo exclusivo</h2>
+      <p class="body-md" style="margin-bottom:28px">Artigos, dicas e estratégias de edição de vídeo direto no seu e-mail. Sem spam.</p>
+      <div style="display:flex;gap:12px;max-width:400px;margin:0 auto">
+        <input type="email" class="form-input" placeholder="seu@email.com" style="flex:1">
+        <button class="btn btn-primary">Assinar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/js/components.js"></script>
+<script>
+  renderNavbar('blog.html');
+  renderFooter();
+  initFilters('#blogGrid', '.blog-card', 'category');
+
+  // Search
+  document.getElementById('blogSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.blog-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>
