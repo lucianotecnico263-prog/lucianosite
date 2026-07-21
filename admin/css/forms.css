@@ -1,0 +1,6 @@
+.form-card { padding: 20px; }
+.field-inline { display: flex; gap: 10px; align-items: center; }
+.field-inline input[type='checkbox'] { width: auto; }
+.helper-text { color: var(--muted); font-size: .78rem; }
+.file-preview { margin-top: 12px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); max-width: 240px; }
+.file-preview img { width: 100%; display: block; }

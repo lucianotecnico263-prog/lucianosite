@@ -1,0 +1,6 @@
+.table-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.table-actions button { padding: 8px 10px; border-radius: 10px; border: none; cursor: pointer; }
+.table-actions .btn-edit { background: rgba(59, 130, 246, 0.16); color: #bfdbfe; }
+.table-actions .btn-archive { background: rgba(245, 158, 11, 0.18); color: #fcd34d; }
+.table-actions .btn-delete { background: rgba(239, 68, 68, 0.16); color: #fecaca; }
+.table-actions .btn-duplicate { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }

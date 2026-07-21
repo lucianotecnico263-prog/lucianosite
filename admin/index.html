@@ -1,125 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Admin — Luciano Editor</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="../assets/css/style.css">
-<style>
-  body { background:var(--gray-50); padding:32px 24px; }
-  .admin-wrap { max-width:900px; margin:0 auto; }
-  .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
-  .admin-header h1 { font-size:1.4rem; font-weight:800; }
-  .logout-btn { cursor:pointer; }
-
-  .form-group { margin-bottom:16px; }
-  .form-group label { display:block; font-size:.82rem; font-weight:600; color:var(--gray-600); margin-bottom:6px; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  @media (max-width:640px){ .form-row{ grid-template-columns:1fr; } }
-
-  #save-status { display:none; margin-top:12px; padding:10px 14px; border-radius:var(--radius-md); font-size:.875rem; }
-  #save-status.success { display:block; background:#ECFDF5; border:1px solid #6EE7B7; color:#047857; }
-  #save-status.error   { display:block; background:#FEF2F2; border:1px solid #FCA5A5; color:#B91C1C; }
-
-  #imagem-preview-wrap { display:none; margin-top:10px; }
-  #imagem-preview { max-width:200px; max-height:120px; border-radius:var(--radius-md); object-fit:cover; display:block; }
-  .upload-status { font-size:.8rem; color:var(--gray-500); margin-top:6px; }
-
-  .post-item {
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:14px 16px; border:1px solid var(--gray-200); border-radius:var(--radius-md); margin-bottom:10px;
-  }
-  .post-item .post-title { font-weight:600; color:var(--gray-900); }
-  .post-item .post-meta { font-size:.8rem; color:var(--gray-500); }
-  .post-actions { display:flex; gap:8px; flex-shrink:0; }
-  .post-actions button {
-    border:none; background:var(--gray-100); padding:6px 12px; border-radius:var(--radius-sm);
-    font-size:.8rem; cursor:pointer; font-weight:600;
-  }
-  .post-actions .edit-btn:hover { background:var(--purple-100); color:var(--purple-700); }
-  .post-actions .delete-btn:hover { background:#FEE2E2; color:#B91C1C; }
-  .status-tag { font-size:.7rem; padding:2px 8px; border-radius:999px; font-weight:700; }
-  .status-tag.pub { background:#ECFDF5; color:#047857; }
-  .status-tag.draft { background:var(--gray-100); color:var(--gray-500); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin — Luciano Editor</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
-
-<div class="admin-wrap">
-  <div class="admin-header">
-    <h1>⚙️ Publicações do Blog</h1>
-    <button class="btn btn-secondary logout-btn" id="logout-btn">Sair →</button>
-  </div>
-
-  <!-- Formulário criar/editar -->
-  <div class="card" style="margin-bottom:28px;">
-    <h2 class="heading-lg" style="margin-bottom:16px;" id="form-title">Nova publicação</h2>
-    <form id="form-publicacao" novalidate>
-      <input type="hidden" id="post-id" value="">
-      <!-- guarda a URL final da imagem (upload ou já existente ao editar) -->
-      <input type="hidden" id="imagem_url" value="">
-
-      <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" class="form-input" placeholder="Título do artigo" required>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="categoria">Categoria</label>
-          <select id="categoria" class="form-select">
-            <option value="edicao">Edição</option>
-            <option value="estrategia">Estratégia</option>
-            <option value="storytelling">Storytelling</option>
-            <option value="marketing">Marketing</option>
-            <option value="ia">IA</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="imagem_arquivo">Imagem da publicação</label>
-          <input type="file" id="imagem_arquivo" class="form-input" accept="image/png, image/jpeg, image/webp">
-          <div class="upload-status" id="upload-status"></div>
-          <div id="imagem-preview-wrap">
-            <img id="imagem-preview" src="" alt="Pré-visualização">
-          </div>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">⚙️</div>
+        <div>
+          <div>Luciano Admin</div>
+          <small style="color: var(--muted);">CMS</small>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="resumo">Resumo (aparece no card)</label>
-        <textarea id="resumo" class="form-textarea" rows="2" placeholder="Resumo curto do artigo" required></textarea>
+      <div class="sidebar-section-title">Navegação</div>
+      <button class="nav-link active" data-route="dashboard">📊 Dashboard</button>
+      <button class="nav-link" data-route="posts">📝 Publicações</button>
+      <button class="nav-link" data-route="categories">🏷️ Categorias</button>
+      <button class="nav-link" data-route="media">🖼️ Mídia</button>
+      <button class="nav-link" data-route="messages">💬 Mensagens</button>
+      <button class="nav-link" data-route="users">👤 Usuários</button>
+      <button class="nav-link" data-route="logs">📜 Logs</button>
+      <button class="nav-link" data-route="settings">⚙️ Configurações</button>
+
+      <div class="sidebar-section-title">Ações</div>
+      <button class="nav-link" id="logout-btn">🚪 Sair</button>
+    </aside>
+
+    <main class="main-area">
+      <div class="topbar">
+        <div>
+          <h1 class="page-title">Painel Administrativo</h1>
+          <p class="page-subtitle">Estrutura modular, CMS profissional e compatível com GitHub Pages.</p>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge badge-published">Online</span>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="conteudo">Conteúdo completo</label>
-        <textarea id="conteudo" class="form-textarea" rows="8" placeholder="Texto completo do artigo" required></textarea>
-      </div>
-
-      <div class="form-group" style="display:flex;align-items:center;gap:8px;">
-        <input type="checkbox" id="publicado" checked style="width:auto;">
-        <label for="publicado" style="margin:0;">Publicado (visível no site)</label>
-      </div>
-
-      <div style="display:flex; gap:12px;">
-        <button type="submit" class="btn btn-primary" id="save-btn">Salvar</button>
-        <button type="button" class="btn btn-secondary" id="cancel-edit-btn" style="display:none;">Cancelar edição</button>
-      </div>
-      <div id="save-status" role="alert"></div>
-    </form>
+      <div id="admin-view"></div>
+    </main>
   </div>
 
-  <!-- Lista de publicações -->
-  <div class="card">
-    <h2 class="heading-lg" style="margin-bottom:16px;">Publicações existentes</h2>
-    <div id="posts-list">
-      <p class="body-sm">Carregando...</p>
-    </div>
-  </div>
-</div>
+  <div id="toast-stack" class="toast-stack"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../assets/js/supabase-config.js"></script>
-<script src="admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/supabase-config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="services/posts.js"></script>
+  <script src="services/media.js"></script>
+  <script src="services/settings.js"></script>
+  <script src="pages/dashboard.js"></script>
+  <script src="pages/posts.js"></script>
+  <script src="pages/categories.js"></script>
+  <script src="pages/media.js"></script>
+  <script src="pages/messages.js"></script>
+  <script src="pages/users.js"></script>
+  <script src="pages/logs.js"></script>
+  <script src="pages/settings.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

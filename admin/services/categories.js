@@ -1,0 +1,21 @@
+const AdminCategoriesService = {
+  async list() {
+    const { data, error } = await supabaseClient.from('categorias').select('*').order('ordem', { ascending: true });
+    return { data: data || [], error };
+  },
+
+  async create(payload) {
+    const { data, error } = await supabaseClient.from('categorias').insert([payload]).select().single();
+    return { data, error };
+  },
+
+  async update(id, payload) {
+    const { data, error } = await supabaseClient.from('categorias').update(payload).eq('id', id).select().single();
+    return { data, error };
+  },
+
+  async remove(id) {
+    const { error } = await supabaseClient.from('categorias').delete().eq('id', id);
+    return { error };
+  }
+};
