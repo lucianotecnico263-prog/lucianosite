@@ -8,3 +8,5 @@ const SUPABASE_ANON_KEY = 'sb_publishable_mX4XsY4ezp9WUkEPE1vMJQ_K_d359Z3'; // c
 
 // Exige que o script do Supabase já tenha sido carregado via CDN antes deste arquivo
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Disponibiliza o cliente para os módulos públicos de conteúdo carregados depois deste arquivo.
+window.supabaseClient = supabaseClient;
