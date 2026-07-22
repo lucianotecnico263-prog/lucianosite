@@ -36,7 +36,7 @@
       <button class="filter-btn" data-filter="corporativo">Corporativo</button>
     </div>
 
-    <div class="portfolio-grid" id="portfolioGrid">
+    <div class="portfolio-grid" id="portfolioGrid" data-public-portfolios>
 
       <div class="portfolio-card" data-category="youtube">
         <div class="portfolio-thumb" style="background:linear-gradient(135deg,#EDE9FE,#DBEAFE)">
@@ -189,6 +189,10 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/site-content.js"></script>
+<script src="assets/js/public-collections.js"></script>
 <script src="assets/js/components.js"></script>
 <script>
   renderNavbar('portfolio.html');

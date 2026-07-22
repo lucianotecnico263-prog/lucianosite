@@ -52,20 +52,35 @@ create trigger on_auth_user_created
   for each row execute procedure public.handle_new_user();
 
 -- Relação consistente entre posts e categorias.
+-- Algumas instalações já migraram para categoria_id. O bloco abaixo só
+-- aproveita a coluna antiga categoria quando ela ainda existir.
 alter table public.publicacoes
   add column if not exists categoria_id uuid;
 
-insert into public.categorias (nome, slug, ordem, ativo)
-select distinct trim(categoria), lower(regexp_replace(trim(categoria), '[^[:alnum:]]+', '-', 'g')), 0, true
-from public.publicacoes
-where categoria is not null and trim(categoria) <> ''
-on conflict do nothing;
+do $$
+begin
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'publicacoes' and column_name = 'categoria'
+  ) then
+    execute $sql$
+      insert into public.categorias (nome, slug, ordem, ativo)
+      select distinct trim(categoria), lower(regexp_replace(trim(categoria), '[^[:alnum:]]+', '-', 'g')), 0, true
+      from public.publicacoes
+      where categoria is not null and trim(categoria) <> ''
+      on conflict do nothing
+    $sql$;
 
-update public.publicacoes as publicacao
-set categoria_id = categoria.id
-from public.categorias as categoria
-where publicacao.categoria is not null
-  and categoria.slug = lower(regexp_replace(trim(publicacao.categoria), '[^[:alnum:]]+', '-', 'g'));
+    execute $sql$
+      update public.publicacoes as publicacao
+      set categoria_id = categoria.id
+      from public.categorias as categoria
+      where publicacao.categoria is not null
+        and categoria.slug = lower(regexp_replace(trim(publicacao.categoria), '[^[:alnum:]]+', '-', 'g'))
+    $sql$;
+  end if;
+end;
+$$;
 
 alter table public.publicacoes
   drop constraint if exists publicacoes_categoria_id_fkey;
@@ -88,6 +103,9 @@ alter table public.publicacoes
 alter table public.mensagens
   alter column lida set default false,
   alter column arquivada set default false;
+
+alter table public.mensagens
+  drop constraint if exists mensagens_mensagem_tamanho_check;
 
 alter table public.mensagens
   add constraint mensagens_mensagem_tamanho_check
@@ -138,6 +156,18 @@ drop policy if exists "authenticated_can_update_own_posts" on public.publicacoes
 drop policy if exists "public_can_read_published_posts" on public.publicacoes;
 drop policy if exists "publico_le_publicados" on public.publicacoes;
 drop policy if exists "Permitir CRUD no proprio perfil" on public.usuarios;
+drop policy if exists "public_read_active_categories" on public.categorias;
+drop policy if exists "admin_manage_categories" on public.categorias;
+drop policy if exists "public_read_site_settings" on public.configuracoes;
+drop policy if exists "admin_manage_settings" on public.configuracoes;
+drop policy if exists "admin_read_logs" on public.logs;
+drop policy if exists "admin_create_logs" on public.logs;
+drop policy if exists "public_send_messages" on public.mensagens;
+drop policy if exists "admin_manage_messages" on public.mensagens;
+drop policy if exists "public_read_published_posts" on public.publicacoes;
+drop policy if exists "admin_manage_posts" on public.publicacoes;
+drop policy if exists "user_read_own_profile" on public.usuarios;
+drop policy if exists "admin_manage_profiles" on public.usuarios;
 
 create policy "public_read_active_categories" on public.categorias
 for select to anon using (ativo = true);

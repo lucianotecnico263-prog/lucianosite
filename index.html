@@ -19,14 +19,14 @@
         <div class="hero-eyebrow">
           <span class="badge badge-purple">🚀 Edição Estratégica de Vídeos</span>
         </div>
-        <h1 class="display-xl hero-title">
+        <h1 class="display-xl hero-title" data-site-content="hero_titulo">
           Vídeos que <span class="gradient-text">prendem atenção</span> e geram resultados
         </h1>
-        <p class="body-lg hero-subtitle">
+        <p class="body-lg hero-subtitle" data-site-content="hero_subtitulo">
           Transformamos suas gravações e roteiros em conteúdo audiovisual profissional — com narrativa, storytelling e estratégia que constroem autoridade e convertem audiência em clientes.
         </p>
         <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary btn-lg">Quero meus vídeos estratégicos</a>
+          <a href="contato.html" class="btn btn-primary btn-lg" data-site-cta>Quero meus vídeos estratégicos</a>
           <a href="portfolio.html" class="btn btn-secondary btn-lg">Ver portfólio</a>
         </div>
         <div class="hero-stats">
@@ -161,7 +161,7 @@
       <h2 class="display-md">Soluções audiovisuais <span class="gradient-text">para cada objetivo</span></h2>
       <p class="body-lg">Não vendemos apenas edição. Vendemos narrativa, retenção e estratégia que transforma seu conteúdo em autoridade.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid" data-public-services>
       <div class="card service-card reveal">
         <div class="card-icon">🎥</div>
         <h3 class="heading-md">Edição YouTube</h3>
@@ -246,7 +246,7 @@
       <h2 class="display-md">Projetos que <span class="gradient-text">falam por si</span></h2>
       <p class="body-lg">Uma seleção dos trabalhos que mais orgulhamos — cada um com uma história, um desafio e um resultado concreto.</p>
     </div>
-    <div class="portfolio-grid">
+    <div class="portfolio-grid" data-public-portfolios>
       <div class="portfolio-card reveal">
         <div class="portfolio-thumb" style="background: linear-gradient(135deg,#EDE9FE,#DBEAFE)">
           <svg viewBox="0 0 80 80" fill="none"><rect x="10" y="20" width="60" height="40" rx="6" fill="url(#pg1)"/><polygon points="32,30 32,50 56,40" fill="white"/><defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs></svg>
@@ -309,7 +309,7 @@
       <span class="badge badge-purple">⭐ Depoimentos</span>
       <h2 class="display-md">O que nossos <span class="gradient-text">clientes dizem</span></h2>
     </div>
-    <div class="testimonials-grid">
+    <div class="testimonials-grid" data-public-testimonials>
       <div class="card testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"O Luciano não é apenas um editor. Ele pensa estrategicamente em cada corte. Meu canal cresceu 3x depois que comecei a trabalhar com ele."</p>
@@ -406,7 +406,7 @@
       <span class="badge badge-gray">❓ FAQ</span>
       <h2 class="display-md">Perguntas <span class="gradient-text">frequentes</span></h2>
     </div>
-    <div class="faq-list">
+    <div class="faq-list" data-public-faqs>
       <div class="faq-item">
         <button class="faq-question">Qual é o prazo de entrega dos vídeos? <span class="faq-icon">+</span></button>
         <div class="faq-answer">O prazo varia conforme o tipo e a complexidade do projeto. Reels e Shorts: 2–3 dias úteis. Vídeos YouTube: 4–7 dias úteis. VSL e Documentários: 7–14 dias úteis. Prazos expressos podem ser negociados.</div>
@@ -448,6 +448,10 @@
 
 <div id="footer-placeholder"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/site-content.js"></script>
+<script src="assets/js/public-collections.js"></script>
 <script src="assets/js/components.js"></script>
 <script>
   renderNavbar('index.html');

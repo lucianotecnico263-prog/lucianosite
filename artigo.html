@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artigo | Luciano Editor</title>
+  <meta name="description" content="Conteúdo do blog Luciano Editor.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main class="section">
+    <article class="container" style="max-width:860px">
+      <a href="blog.html" class="body-sm" style="display:inline-flex;margin-bottom:28px">&larr; Voltar ao blog</a>
+      <div id="article-loading" class="empty-state">Carregando artigo...</div>
+      <div id="article-content" style="display:none"></div>
+    </article>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/site-content.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    renderNavbar('blog.html');
+    renderFooter();
+
+    const CATEGORY_LABELS = {
+      edicao: 'Edição',
+      estrategia: 'Estratégia',
+      storytelling: 'Storytelling',
+      marketing: 'Marketing',
+      ia: 'IA'
+    };
+
+    function escapeHtml(value) {
+      const element = document.createElement('div');
+      element.textContent = value || '';
+      return element.innerHTML;
+    }
+
+    function safeImageUrl(value) {
+      if (!value) return '';
+      try {
+        const url = new URL(value);
+        return ['https:', 'http:'].includes(url.protocol) ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
+
+    function renderArticle(post) {
+      const category = post.categoria?.slug;
+      const categoryName = CATEGORY_LABELS[category] || post.categoria?.nome || 'Artigo';
+      const imageUrl = safeImageUrl(post.imagem_url);
+      const content = escapeHtml(post.conteudo).replace(/\r?\n/g, '<br>');
+      const date = new Date(post.created_at).toLocaleDateString('pt-BR', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      });
+
+      document.title = `${post.titulo} | Luciano Editor`;
+      document.querySelector('meta[name="description"]').content = post.resumo || 'Artigo do blog Luciano Editor.';
+      document.getElementById('article-loading').style.display = 'none';
+      const root = document.getElementById('article-content');
+      root.innerHTML = `
+        <header style="margin-bottom:34px">
+          <span class="badge badge-blue">${escapeHtml(categoryName)}</span>
+          <h1 class="display-md" style="margin:16px 0">${escapeHtml(post.titulo)}</h1>
+          <p class="body-lg" style="margin-bottom:16px">${escapeHtml(post.resumo)}</p>
+          <p class="body-sm">Publicado em ${date}</p>
+        </header>
+        ${imageUrl ? `<img src="${imageUrl}" alt="${escapeHtml(post.titulo)}" style="width:100%;max-height:460px;object-fit:cover;border-radius:18px;margin-bottom:34px">` : ''}
+        <div class="body-md" style="font-size:1.05rem;line-height:1.85;color:var(--gray-700)">${content}</div>
+      `;
+      root.style.display = 'block';
+    }
+
+    async function loadArticle() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      const loading = document.getElementById('article-loading');
+      if (!id) {
+        loading.textContent = 'Artigo não encontrado.';
+        return;
+      }
+
+      const { data, error } = await supabaseClient
+        .from('publicacoes')
+        .select('*, categoria:categorias!publicacoes_categoria_id_fkey(id, nome, slug)')
+        .eq('id', id)
+        .eq('publicado', true)
+        .maybeSingle();
+
+      if (error || !data) {
+        loading.textContent = 'Este artigo não está disponível ou foi removido.';
+        return;
+      }
+      renderArticle(data);
+    }
+
+    loadArticle();
+  </script>
+</body>
+</html>

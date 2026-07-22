@@ -1,8 +1,11 @@
 window.AdminDashboard = {
   async loadMetrics() {
-    const [postsResult, categoriesResult] = await Promise.all([
+    const [postsResult, categoriesResult, messagesResult, usersResult, portfoliosResult] = await Promise.all([
       AdminPostsService.list(),
-      AdminCategoriesService.list()
+      AdminCategoriesService.list(),
+      supabaseClient.from('mensagens').select('id, lida'),
+      supabaseClient.from('usuarios').select('id'),
+      AdminCmsService.list('portfolios')
     ]);
 
     const posts = postsResult.data || [];
@@ -11,8 +14,9 @@ window.AdminDashboard = {
     return {
       posts: posts.length,
       categorias: categories.length,
-      uploads: 0,
-      users: 1
+      mensagens: (messagesResult.data || []).filter(item => !item.lida).length,
+      usuarios: (usersResult.data || []).length,
+      portfolios: (portfoliosResult.data || []).length
     };
   }
 };

@@ -20,14 +20,19 @@ window.AdminPages.dashboard = {
             <div class="metric-trend">Ativas no blog</div>
           </div>
           <div class="metric-card panel">
-            <div class="metric-label">Uploads</div>
-            <div class="metric-value">${metrics.uploads}</div>
-            <div class="metric-trend">Arquivos no storage</div>
+            <div class="metric-label">Mensagens novas</div>
+            <div class="metric-value">${metrics.mensagens}</div>
+            <div class="metric-trend">Pendentes de leitura</div>
+          </div>
+          <div class="metric-card panel">
+            <div class="metric-label">Portfólios</div>
+            <div class="metric-value">${metrics.portfolios}</div>
+            <div class="metric-trend">Projetos cadastrados</div>
           </div>
           <div class="metric-card panel">
             <div class="metric-label">Usuários</div>
-            <div class="metric-value">${metrics.users}</div>
-            <div class="metric-trend">Administradores ativos</div>
+            <div class="metric-value">${metrics.usuarios}</div>
+            <div class="metric-trend">Contas cadastradas</div>
           </div>
         </div>
       </div>

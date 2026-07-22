@@ -11,8 +11,8 @@ Site institucional estático com CMS e backend no Supabase.
 
 ## Instalação e publicação
 
-1. No Supabase SQL Editor, execute `supabase/migrations/20260721_security_and_cms.sql` inteiro.
-2. Antes de executar, substitua `SEU_EMAIL_DE_ADMIN@EXEMPLO.COM` pelo e-mail usado no Supabase Auth para administrar o site.
+1. No Supabase SQL Editor, execute primeiro `supabase/migrations/20260721_security_and_cms.sql` e depois `supabase/migrations/20260722_professional_cms.sql`.
+2. Antes de executar a primeira migração, substitua `SEU_EMAIL_DE_ADMIN@EXEMPLO.COM` pelo e-mail usado no Supabase Auth para administrar o site.
 3. Publique os arquivos da raiz mantendo a estrutura de pastas.
 
 ## Segurança

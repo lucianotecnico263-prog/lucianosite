@@ -2,7 +2,12 @@ const AdminRouter = {
   routes: {
     dashboard: window.AdminPages?.dashboard,
     posts: window.AdminPages?.posts,
+    siteContent: window.AdminPages?.siteContent,
     categories: window.AdminPages?.categories,
+    services: window.AdminPages?.services,
+    portfolios: window.AdminPages?.portfolios,
+    testimonials: window.AdminPages?.testimonials,
+    faqs: window.AdminPages?.faqs,
     media: window.AdminPages?.media,
     messages: window.AdminPages?.messages,
     users: window.AdminPages?.users,

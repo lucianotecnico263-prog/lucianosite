@@ -71,6 +71,7 @@
 <div id="footer-placeholder"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/site-content.js"></script>
 <script src="assets/js/components.js"></script>
 <script>
   renderNavbar('blog.html');
@@ -125,7 +126,7 @@
           <p class="body-md" style="margin-bottom:24px">${escapeHtml(post.resumo)}</p>
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div class="body-sm">${new Date(post.created_at).toLocaleDateString('pt-BR')}</div>
-            <a href="#" class="btn btn-primary btn-sm">Ler artigo</a>
+            <a href="artigo.html?id=${encodeURIComponent(post.id)}" class="btn btn-primary btn-sm">Ler artigo</a>
           </div>
         </div>
       </div>
@@ -152,7 +153,7 @@
             </div>
             <h3>${escapeHtml(post.titulo)}</h3>
             <p class="body-sm">${escapeHtml(post.resumo)}</p>
-            <a href="#" class="blog-read-more">Ler artigo <span>→</span></a>
+            <a href="artigo.html?id=${encodeURIComponent(post.id)}" class="blog-read-more">Ler artigo <span>→</span></a>
           </div>
         </div>
       `;
