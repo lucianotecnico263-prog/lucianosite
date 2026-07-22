@@ -1,246 +1,102 @@
-# Luciano Júnior | Editor de Vídeo
-
-Site profissional desenvolvido para apresentação de serviços, portfólio e gerenciamento de conteúdo administrativo.
-
-## Tecnologias
-
-* Frontend estático (HTML5, CSS3 e JavaScript)
-* GitHub Pages (Hospedagem)
-* Supabase (Banco de dados e Autenticação)
-* Supabase Auth (Login do painel administrativo)
-
----
-
-# Arquitetura
-
-```
-GitHub Pages
-        │
-        ▼
-Frontend (HTML/CSS/JavaScript)
-        │
-        ▼
- Supabase Auth
-        │
-        ▼
- Banco de Dados Supabase
-```
-
-O GitHub Pages hospeda todo o site.
-
-O Supabase é responsável por:
-
-* autenticação do administrador;
-* armazenamento dos dados;
-* comunicação via API;
-* gerenciamento das sessões de login.
-
----
-
-# Estrutura do Projeto
-
-```
-lucianosite-main/
-│
-├── admin/
-│   ├── login.html
-│   ├── index.html
-│   └── admin.js
-│
-├── assets/
-│   ├── css/
-│   ├── img/
-│   └── js/
-│       ├── components.js
-│       └── supabase-config.js
-│
-├── frontend/
-│   ├── index.html
-│   ├── app.js
-│   ├── _headers
-│   └── _redirects
-│
-├── blog.html
-├── contato.html
-└── README.md
-```
-
----
-
-# Funcionalidades
-
-* Página inicial
-* Página de contato
-* Blog
-* Painel administrativo
-* Login utilizando Supabase Auth
-* Integração com banco de dados Supabase
-* Componentes reutilizáveis em JavaScript
-
----
-
-# Configuração do Supabase
-
-A configuração está localizada em:
-
-```
-assets/js/supabase-config.js
-```
-
-Exemplo:
-
-```javascript
-const SUPABASE_URL = "https://SEU-PROJETO.supabase.co";
-
-const SUPABASE_ANON_KEY =
-"SEU_ANON_KEY";
-```
-
-O projeto utiliza apenas a chave pública (Anon Key).
-
-**Nunca utilize a Service Role Key no frontend.**
-
----
-
-# Como executar localmente
-
-Basta utilizar qualquer servidor estático.
-
-Exemplo com VS Code:
-
-1. Instale a extensão **Live Server**.
-2. Clique em **Open with Live Server**.
-
-Ou utilize:
-
-```
-python -m http.server
-```
-
-Depois acesse:
-
-```
-http://localhost:8000
-```
-
----
-
-# Publicação no GitHub Pages
-
-1. Faça commit das alterações.
-
-```
-git add .
-git commit -m "Atualizações"
-git push
-```
-
-2. No GitHub:
-
-Settings
-
-→ Pages
-
-Configure:
-
-* Source: Deploy from a branch
-* Branch: main
-* Folder: / (root)
-
-Após alguns minutos o site estará publicado.
-
----
-
-# Painel Administrativo
-
-Página:
-
-```
-/admin/login.html
-```
-
-Após autenticação, o usuário é direcionado ao painel administrativo.
-
-O login utiliza o Supabase Auth.
-
----
-
-# Segurança
-
-O projeto utiliza:
-
-* Supabase Auth
-* Sessões autenticadas
-* Chave pública (Anon Key)
-* Comunicação HTTPS
-* Separação entre frontend e banco de dados
-
-Recomenda-se habilitar **Row Level Security (RLS)** em todas as tabelas do Supabase.
-
----
-
-# Tecnologias Utilizadas
-
-* HTML5
-* CSS3
-* JavaScript ES6
-* Supabase
-* GitHub Pages
-
----
-
-# Fluxo da Aplicação
-
-```
-Usuário
-    │
-    ▼
-GitHub Pages
-    │
-    ▼
-JavaScript
-    │
-    ▼
-Supabase Auth
-    │
-    ▼
-Supabase Database
-```
-
----
-
-# Boas Práticas
-
-* Nunca exponha a Service Role Key.
-* Utilize RLS em todas as tabelas.
-* Faça backup periódico do banco de dados.
-* Utilize HTTPS.
-* Versione o projeto com Git.
-
----
-
-# Deploy
-
-Frontend
-
-* GitHub Pages
-
-Backend
-
-* Supabase
-
-Banco de Dados
-
-* PostgreSQL (Supabase)
-
-Autenticação
-
-* Supabase Auth
-
----
-
-# Licença
-
-Projeto de uso privado.
-
-Todos os direitos reservados ao proprietário do projeto.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conheça Luciano Júnior, editor de vídeo especializado em conteúdos que geram conexão." />
+  <title>Sobre | Luciano Júnior</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero-content">
+        <span class="badge reveal">SOBRE MIM</span>
+        <h1 class="display-lg reveal" data-site-content="sobre_titulo">Edição que transforma <span class="gradient-text">ideias em impacto.</span></h1>
+        <p class="body-lg reveal" data-site-content="sobre_texto">Sou Luciano Júnior, editor de vídeo. Uno técnica, narrativa e atenção aos detalhes para criar conteúdos que prendem a atenção e representam a sua marca.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container about-grid">
+        <div class="about-photo-wrap reveal">
+          <img class="about-photo" src="assets/img/luciano-photo.jpg" alt="Luciano Júnior, editor de vídeo" />
+        </div>
+        <div class="about-content reveal">
+          <span class="eyebrow">CRIATIVIDADE COM PROPÓSITO</span>
+          <h2 class="display-md">Mais do que cortar cenas, eu construo histórias.</h2>
+          <p class="body-md">Cada projeto começa com uma boa conversa: entender sua mensagem, seu público e o resultado que você quer alcançar. A partir daí, transformo material bruto em vídeos claros, dinâmicos e com personalidade.</p>
+          <p class="body-md">Do conteúdo para redes sociais a vídeos institucionais, meu foco é entregar uma edição consistente, alinhada à sua identidade e pronta para gerar conexão.</p>
+          <a href="contato.html" class="btn btn-primary">Vamos conversar <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header about-section-header reveal">
+          <span class="eyebrow">COMO EU TRABALHO</span>
+          <h2 class="display-md">Um processo simples, próximo e profissional.</h2>
+        </div>
+        <div class="process-grid">
+          <article class="process-card reveal">
+            <span class="process-number">01</span>
+            <h3>Entendimento</h3>
+            <p>Alinhamos objetivo, referências, formato e o tom que o vídeo precisa transmitir.</p>
+          </article>
+          <article class="process-card reveal">
+            <span class="process-number">02</span>
+            <h3>Construção</h3>
+            <p>Organizo a narrativa, ritmo, trilha, cortes e elementos visuais para dar vida à ideia.</p>
+          </article>
+          <article class="process-card reveal">
+            <span class="process-number">03</span>
+            <h3>Refinamento</h3>
+            <p>Você acompanha o resultado e ajustamos os detalhes para chegar à melhor versão final.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container values-grid">
+        <div class="reveal">
+          <span class="eyebrow">O QUE VOCÊ PODE ESPERAR</span>
+          <h2 class="display-md">Parceria em cada frame.</h2>
+        </div>
+        <div class="values-list reveal">
+          <div class="value-item"><span>✦</span><div><h3>Comunicação clara</h3><p>Você sabe em que etapa o projeto está e participa das decisões importantes.</p></div></div>
+          <div class="value-item"><span>✦</span><div><h3>Olhar estratégico</h3><p>As escolhas de edição servem à mensagem, ao público e ao objetivo do seu conteúdo.</p></div></div>
+          <div class="value-item"><span>✦</span><div><h3>Cuidado com os detalhes</h3><p>Ritmo, som, cor e acabamento recebem a atenção necessária para valorizar o resultado.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container cta-content reveal">
+        <span class="eyebrow">SEU PRÓXIMO VÍDEO COMEÇA AQUI</span>
+        <h2 class="display-md">Vamos criar algo que as pessoas queiram assistir.</h2>
+        <p class="body-md">Conte um pouco sobre o seu projeto e receba um atendimento personalizado.</p>
+        <a href="contato.html" class="btn btn-secondary">Falar com Luciano <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/site-content.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    renderNavbar('sobre.html');
+    renderFooter();
+    initReveal();
+  </script>
+</body>
+</html>

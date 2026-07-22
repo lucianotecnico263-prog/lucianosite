@@ -22,6 +22,17 @@ window.AdminPages.categories = {
               <label for="category-slug">Slug</label>
               <input id="category-slug" type="text" required>
             </div>
+            <div class="form-field">
+              <label for="category-order">Ordem</label>
+              <input id="category-order" type="number" min="0" value="0">
+            </div>
+            <div class="form-field">
+              <label for="category-active">Status</label>
+              <select id="category-active">
+                <option value="true">Ativa (aparece no blog)</option>
+                <option value="false">Inativa (oculta no blog)</option>
+              </select>
+            </div>
             <div class="table-actions">
               <button class="btn btn-primary" type="submit">Salvar categoria</button>
               <button class="btn btn-secondary" type="button" id="cancel-category-edit">Cancelar</button>
@@ -64,8 +75,8 @@ window.AdminPages.categories = {
       const payload = {
         nome: root.querySelector('#category-name').value.trim(),
         slug: AdminUtils.slugify(root.querySelector('#category-slug').value || root.querySelector('#category-name').value),
-        ordem: 0,
-        ativo: true
+        ordem: Number(root.querySelector('#category-order').value) || 0,
+        ativo: root.querySelector('#category-active').value === 'true'
       };
 
       const { error } = id
@@ -94,6 +105,8 @@ window.AdminPages.categories = {
     root.querySelector('#category-id').value = '';
     root.querySelector('#category-name').value = '';
     root.querySelector('#category-slug').value = '';
+    root.querySelector('#category-order').value = '0';
+    root.querySelector('#category-active').value = 'true';
   },
 
   edit(root, id) {
@@ -103,6 +116,8 @@ window.AdminPages.categories = {
     root.querySelector('#category-id').value = category.id;
     root.querySelector('#category-name').value = category.nome || '';
     root.querySelector('#category-slug').value = category.slug || '';
+    root.querySelector('#category-order').value = category.ordem || 0;
+    root.querySelector('#category-active').value = String(category.ativo !== false);
   },
 
   async delete(root, id) {

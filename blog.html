@@ -28,13 +28,8 @@
 
     <!-- Search + Filters -->
     <div class="reveal" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px">
-      <div class="blog-filters" style="margin-bottom:0">
+      <div class="blog-filters" id="blogFilters" style="margin-bottom:0">
         <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="edicao">Edição</button>
-        <button class="filter-btn" data-filter="estrategia">Estratégia</button>
-        <button class="filter-btn" data-filter="storytelling">Storytelling</button>
-        <button class="filter-btn" data-filter="marketing">Marketing</button>
-        <button class="filter-btn" data-filter="ia">IA</button>
       </div>
       <div class="blog-search">
         <svg class="blog-search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -78,14 +73,6 @@
   renderFooter();
   initReveal();
 
-  const CATEGORIA_LABEL = {
-    edicao: { badge: 'badge-purple', nome: 'Edição' },
-    estrategia: { badge: 'badge-blue', nome: 'Estratégia' },
-    storytelling: { badge: 'badge-purple', nome: 'Storytelling' },
-    marketing: { badge: 'badge-blue', nome: 'Marketing' },
-    ia: { badge: 'badge-blue', nome: 'IA' },
-  };
-
   function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str ?? '';
@@ -107,10 +94,44 @@
     }
   }
 
+  function categoryPresentation(category) {
+    const slug = category?.slug || '';
+    return {
+      badge: slug.length % 2 ? 'badge-purple' : 'badge-blue',
+      nome: category?.nome || 'Sem categoria'
+    };
+  }
+
+  function renderCategoryFilters(categories) {
+    const root = document.getElementById('blogFilters');
+    root.innerHTML = `
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      ${categories.map(category => `<button class="filter-btn" data-filter="${escapeHtml(category.slug)}">${escapeHtml(category.nome)}</button>`).join('')}
+    `;
+
+    root.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        root.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        applyBlogFilters();
+      });
+    });
+  }
+
+  function applyBlogFilters() {
+    const activeFilter = document.querySelector('#blogFilters .filter-btn.active')?.dataset.filter || 'all';
+    const query = document.getElementById('blogSearch').value.trim().toLowerCase();
+    document.querySelectorAll('.blog-card').forEach(card => {
+      const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
+      const matchesSearch = !query || card.textContent.toLowerCase().includes(query);
+      card.style.display = matchesCategory && matchesSearch ? '' : 'none';
+    });
+  }
+
   function renderFeatured(post) {
     const el = document.getElementById('blogFeatured');
     if (!post) { el.innerHTML = ''; return; }
-    const cat = CATEGORIA_LABEL[post.categoria?.slug] || { badge: 'badge-gray', nome: post.categoria?.nome || '' };
+    const cat = categoryPresentation(post.categoria);
     const imageUrl = safeImageUrl(post.imagem_url);
 
     el.innerHTML = `
@@ -141,7 +162,7 @@
     }
 
     el.innerHTML = posts.map(post => {
-      const cat = CATEGORIA_LABEL[post.categoria?.slug] || { badge: 'badge-gray', nome: post.categoria?.nome || '' };
+      const cat = categoryPresentation(post.categoria);
       const imageUrl = safeImageUrl(post.imagem_url);
       return `
         <div class="blog-card" data-category="${escapeHtml(post.categoria?.slug || '')}">
@@ -161,11 +182,22 @@
   }
 
   async function carregarBlog() {
-    const { data, error } = await supabaseClient
-      .from('publicacoes')
-      .select('*, categoria:categorias!publicacoes_categoria_id_fkey(id, nome, slug)')
-      .eq('publicado', true)
-      .order('created_at', { ascending: false });
+    const [postsResult, categoriesResult] = await Promise.all([
+      supabaseClient
+        .from('publicacoes')
+        .select('*, categoria:categorias!publicacoes_categoria_id_fkey(id, nome, slug)')
+        .eq('publicado', true)
+        .order('created_at', { ascending: false }),
+      supabaseClient
+        .from('categorias')
+        .select('id, nome, slug')
+        .eq('ativo', true)
+        .order('ordem', { ascending: true })
+        .order('nome', { ascending: true })
+    ]);
+    const { data, error } = postsResult;
+
+    if (!categoriesResult.error) renderCategoryFilters(categoriesResult.data || []);
 
     if (error) {
       document.getElementById('blogGrid').innerHTML = '<p class="body-sm">Não foi possível carregar as publicações agora.</p>';
@@ -176,14 +208,9 @@
     const posts = data || [];
     renderFeatured(posts[0]);
     renderGrid(posts.slice(1));
-    initFilters('#blogGrid', '.blog-card', 'category');
 
     document.getElementById('blogSearch').addEventListener('input', function() {
-      const q = this.value.toLowerCase();
-      document.querySelectorAll('.blog-card').forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(q) ? '' : 'none';
-      });
+      applyBlogFilters();
     });
   }
 
