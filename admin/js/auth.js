@@ -20,6 +20,19 @@ const AdminAuth = {
       window.location.href = 'login.html';
       return null;
     }
+
+    const { data: profile, error } = await supabaseClient
+      .from('usuarios')
+      .select('papel')
+      .eq('id', session.user.id)
+      .single();
+
+    if (error || profile?.papel !== 'admin') {
+      await this.logout();
+      window.location.href = 'login.html?erro=sem-permissao';
+      return null;
+    }
+
     return session;
   }
 };

@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formLogin = document.querySelector('#form-login');
     const errorEl = document.querySelector('#login-error');
     const session = await AdminAuth.session();
+    if (new URLSearchParams(window.location.search).get('erro') === 'sem-permissao') {
+      errorEl.textContent = 'Esta conta não possui permissão de administrador.';
+      errorEl.style.display = 'block';
+    }
 
     if (session) {
       window.location.href = 'index.html';

@@ -5,7 +5,7 @@ window.AdminComponents.navbar = {
       <div class="topbar">
         <div>
           <h1 class="page-title">Painel Administrativo</h1>
-          <p class="page-subtitle">Estrutura modular, CMS profissional e compatível com GitHub Pages.</p>
+          <p class="page-subtitle">CMS protegido por autenticação e permissões do Supabase.</p>
         </div>
         <div class="topbar-actions">
           <span class="badge badge-published">Online</span>

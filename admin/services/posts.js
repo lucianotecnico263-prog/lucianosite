@@ -2,7 +2,7 @@ const AdminPostsService = {
   async list() {
     const { data, error } = await supabaseClient
       .from('publicacoes')
-      .select('*')
+      .select('*, categoria:categorias!publicacoes_categoria_id_fkey(id, nome, slug)')
       .order('created_at', { ascending: false });
 
     return { data: data || [], error };

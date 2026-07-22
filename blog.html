@@ -96,14 +96,25 @@
     return Math.max(1, Math.round(palavras / 200)) + ' min';
   }
 
+  function safeImageUrl(value) {
+    if (!value) return '';
+    try {
+      const url = new URL(value);
+      return ['https:', 'http:'].includes(url.protocol) ? url.href : '';
+    } catch {
+      return '';
+    }
+  }
+
   function renderFeatured(post) {
     const el = document.getElementById('blogFeatured');
     if (!post) { el.innerHTML = ''; return; }
-    const cat = CATEGORIA_LABEL[post.categoria] || { badge: 'badge-gray', nome: post.categoria || '' };
+    const cat = CATEGORIA_LABEL[post.categoria?.slug] || { badge: 'badge-gray', nome: post.categoria?.nome || '' };
+    const imageUrl = safeImageUrl(post.imagem_url);
 
     el.innerHTML = `
       <div class="card reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;padding:0;margin-bottom:48px">
-        <div style="background:${post.imagem_url ? `url('${post.imagem_url}') center/cover` : 'linear-gradient(135deg,#EDE9FE,#DBEAFE)'};display:flex;align-items:center;justify-content:center;font-size:5rem;padding:48px;min-height:280px">${post.imagem_url ? '' : '🎬'}</div>
+        <div style="background:${imageUrl ? `url(&quot;${imageUrl}&quot;) center/cover` : 'linear-gradient(135deg,#EDE9FE,#DBEAFE)'};display:flex;align-items:center;justify-content:center;font-size:5rem;padding:48px;min-height:280px">${imageUrl ? '' : '🎬'}</div>
         <div style="padding:40px">
           <div style="display:flex;gap:12px;margin-bottom:16px">
             <span class="badge badge-purple">Destaque</span>
@@ -129,10 +140,11 @@
     }
 
     el.innerHTML = posts.map(post => {
-      const cat = CATEGORIA_LABEL[post.categoria] || { badge: 'badge-gray', nome: post.categoria || '' };
+      const cat = CATEGORIA_LABEL[post.categoria?.slug] || { badge: 'badge-gray', nome: post.categoria?.nome || '' };
+      const imageUrl = safeImageUrl(post.imagem_url);
       return `
-        <div class="blog-card" data-category="${post.categoria || ''}">
-          <div class="blog-thumb" style="${post.imagem_url ? `background:url('${post.imagem_url}') center/cover` : 'background:linear-gradient(135deg,#DBEAFE,#EDE9FE)'}">${post.imagem_url ? '' : '📝'}</div>
+        <div class="blog-card" data-category="${escapeHtml(post.categoria?.slug || '')}">
+          <div class="blog-thumb" style="${imageUrl ? `background:url(&quot;${imageUrl}&quot;) center/cover` : 'background:linear-gradient(135deg,#DBEAFE,#EDE9FE)'}">${imageUrl ? '' : '📝'}</div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="badge ${cat.badge}">${escapeHtml(cat.nome)}</span>
@@ -150,7 +162,7 @@
   async function carregarBlog() {
     const { data, error } = await supabaseClient
       .from('publicacoes')
-      .select('*')
+      .select('*, categoria:categorias!publicacoes_categoria_id_fkey(id, nome, slug)')
       .eq('publicado', true)
       .order('created_at', { ascending: false });
 

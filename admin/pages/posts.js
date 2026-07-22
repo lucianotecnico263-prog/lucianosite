@@ -4,6 +4,12 @@ window.AdminPages.posts = {
   state: { posts: [], editingId: null },
 
   async render(root) {
+    const { data: categories, error: categoriesError } = await AdminCategoriesService.list();
+    const categoryOptions = (categories || [])
+      .filter(category => category.ativo)
+      .map(category => `<option value="${category.id}">${AdminUtils.escapeHtml(category.nome)}</option>`)
+      .join('');
+
     root.innerHTML = `
       <div class="page-card panel">
         <h1 class="page-title">Publicações</h1>
@@ -18,13 +24,11 @@ window.AdminPages.posts = {
               </div>
               <div class="form-field">
                 <label for="post-categoria">Categoria</label>
-                <select id="post-categoria">
-                  <option value="edicao">Edição</option>
-                  <option value="estrategia">Estratégia</option>
-                  <option value="storytelling">Storytelling</option>
-                  <option value="marketing">Marketing</option>
-                  <option value="ia">IA</option>
+                <select id="post-categoria" required>
+                  <option value="">Selecione uma categoria</option>
+                  ${categoryOptions}
                 </select>
+                ${categoriesError ? '<small class="helper-text">Não foi possível carregar as categorias.</small>' : ''}
               </div>
             </div>
             <div class="form-field">
@@ -111,7 +115,7 @@ window.AdminPages.posts = {
           ${data.map(post => `
             <tr>
               <td>${AdminUtils.escapeHtml(post.titulo)}</td>
-              <td>${AdminUtils.escapeHtml(post.categoria || '—')}</td>
+              <td>${AdminUtils.escapeHtml(post.categoria?.nome || '—')}</td>
               <td><span class="badge ${post.publicado ? 'badge-published' : 'badge-draft'}">${post.publicado ? 'Publicado' : 'Rascunho'}</span></td>
               <td>${AdminUtils.formatDate(post.created_at)}</td>
               <td class="table-actions">
@@ -142,7 +146,7 @@ window.AdminPages.posts = {
     const target = root.querySelector('#posts-table-wrap');
 
     const filtered = this.state.posts.filter(post => {
-      const text = `${post.titulo || ''} ${post.categoria || ''}`.toLowerCase();
+      const text = `${post.titulo || ''} ${post.categoria?.nome || ''}`.toLowerCase();
       const matchesSearch = !search || text.includes(search);
       const matchesStatus = status === 'all' || (status === 'published' ? !!post.publicado : !post.publicado);
       return matchesSearch && matchesStatus;
@@ -166,7 +170,7 @@ window.AdminPages.posts = {
     form.querySelector('#post-titulo').value = post.titulo || '';
     form.querySelector('#post-resumo').value = post.resumo || '';
     form.querySelector('#post-conteudo').value = post.conteudo || '';
-    form.querySelector('#post-categoria').value = post.categoria || 'edicao';
+    form.querySelector('#post-categoria').value = post.categoria_id || '';
     form.querySelector('#post-imagem-url').value = post.imagem_url || '';
     form.querySelector('#post-publicado').checked = !!post.publicado;
     this.state.editingId = id;
@@ -178,7 +182,7 @@ window.AdminPages.posts = {
       resumo: form.querySelector('#post-resumo').value.trim(),
       conteudo: form.querySelector('#post-conteudo').value.trim(),
       imagem_url: form.querySelector('#post-imagem-url').value.trim(),
-      categoria: form.querySelector('#post-categoria').value,
+      categoria_id: form.querySelector('#post-categoria').value,
       publicado: form.querySelector('#post-publicado').checked,
     };
 
@@ -207,13 +211,16 @@ window.AdminPages.posts = {
     if (!post) return;
 
     const payload = {
-      ...post,
       titulo: `${post.titulo} (Cópia)`,
+      resumo: post.resumo,
+      conteudo: post.conteudo,
+      imagem_url: post.imagem_url,
+      categoria_id: post.categoria_id,
+      autor_id: (await AdminAuth.requireSession())?.user.id,
       publicado: false,
-      id: undefined,
-      created_at: undefined,
-      updated_at: undefined
     };
+
+    if (!payload.autor_id) return;
 
     const { error } = await AdminPostsService.create(payload);
 
