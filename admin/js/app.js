@@ -51,5 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  document.querySelector('#refresh-btn')?.addEventListener('click', () => window.location.reload());
+
   AdminRouter.init();
 });
